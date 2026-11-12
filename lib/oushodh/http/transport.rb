@@ -4,9 +4,6 @@ require "net/http"
 require "openssl"
 
 module Oushodh
-  # What a transport answers: the HTTP status, the headers with lower-case names, and the body.
-  Response = Data.define(:status, :headers, :body)
-
   # The default transport, on Net::HTTP. A transport is any object with `get(uri, headers:, timeout:)` that
   # returns a Response, or raises ConnectionError or TimeoutError when no answer comes back.
   class Transport
