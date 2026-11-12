@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.0 (unreleased)
+## 0.1.0 (12 Nov, 2026)
 
 - First version of the Ruby SDK for the Oushodh API `/v1`.
 - `Oushodh::Client`: `meta`, `list_medicines`, `medicines` (an `Enumerator` that pages to the end), `search`,
