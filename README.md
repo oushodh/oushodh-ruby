@@ -35,7 +35,7 @@ The full API reference is at [oushodh.dev/docs](https://oushodh.dev/docs).
 Install from GitHub. Add this line to your `Gemfile`:
 
 ```ruby
-gem "oushodh", git: "https://github.com/oushodh/oushodh-ruby.git"
+gem "oushodh", git: "https://github.com/oushodh/oushodh-ruby.git", tag: "v0.1.0"
 ```
 
 Then run `bundle install`.
