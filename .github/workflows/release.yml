@@ -25,4 +25,18 @@ jobs:
       - name: Check the tag matches the gem version
         run: test "$GITHUB_REF_NAME" = "v$(ruby -Ilib -roushodh/version -e 'print Oushodh::VERSION')"
       - run: bundle exec rake test
+      # release-gem does not send `owner`, which RubyGems needs to create a gem from a pending publisher.
+      - name: Get a RubyGems key through trusted publishing
+        env:
+          RUBYGEMS_OWNER_ID: "255987"
+        run: |
+          jwt=$(curl --fail-with-body -sS -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
+            "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=rubygems.org" | jq -r .value)
+          key=$(jq -n --arg jwt "$jwt" --arg owner "$RUBYGEMS_OWNER_ID" '{jwt: $jwt, owner: $owner}' |
+            curl --fail-with-body -sS -X POST https://rubygems.org/api/v1/oidc/trusted_publisher/exchange_token \
+              -H "Content-Type: application/json" --data @- | jq -r .rubygems_api_key)
+          echo "::add-mask::$key"
+          echo "GEM_HOST_API_KEY=$key" >> "$GITHUB_ENV"
       - uses: rubygems/release-gem@v1.4.1
+        with:
+          setup-trusted-publisher: false
