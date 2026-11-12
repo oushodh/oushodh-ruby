@@ -1,0 +1,45 @@
+plugins:
+  - rubocop-minitest
+
+AllCops:
+  TargetRubyVersion: 3.3
+  NewCops: enable
+  SuggestExtensions: false
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/StringLiteralsInInterpolation:
+  EnforcedStyle: double_quotes
+
+Layout/LineLength:
+  Max: 120
+
+# The SDK writes `if` blocks with a blank line before them instead of modifiers.
+Style/IfUnlessModifier:
+  Enabled: false
+
+Style/GuardClause:
+  Enabled: false
+
+# `q` is the API's own parameter name.
+Naming/MethodParameterName:
+  AllowedNames: [q]
+
+# `get_medicine` and `get_image` match the other Oushodh SDKs.
+Naming/AccessorMethodName:
+  Enabled: false
+
+Metrics/ClassLength:
+  Max: 160
+  Exclude: ["test/**/*"]
+
+Metrics/MethodLength:
+  Max: 25
+
+Metrics/AbcSize:
+  Max: 25
+  Exclude: ["test/**/*"]
+
+Minitest/MultipleAssertions:
+  Max: 15

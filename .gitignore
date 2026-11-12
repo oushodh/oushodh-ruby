@@ -1,0 +1,5 @@
+/pkg/
+/vendor/
+/.bundle/
+/coverage/
+*.gem

@@ -1,0 +1,28 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: rubygems
+    permissions:
+      contents: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: ruby/setup-ruby@v1.338.0
+        with:
+          ruby-version: "4.0"
+          bundler-cache: true
+      - name: Check the tag matches the gem version
+        run: test "$GITHUB_REF_NAME" = "v$(ruby -Ilib -roushodh/version -e 'print Oushodh::VERSION')"
+      - run: bundle exec rake test
+      - uses: rubygems/release-gem@v1.4.1
