@@ -28,25 +28,18 @@ The full API reference is at [oushodh.dev/docs](https://oushodh.dev/docs).
 - [Images](#images)
 - [Develop](#develop)
 - [Release](#release)
+- [Links](#links)
 - [License](#license)
 
 ## Install
 
-Install from GitHub. Add this line to your `Gemfile`:
+Install it from [RubyGems](https://rubygems.org/gems/oushodh). Add this line to your `Gemfile`:
 
 ```ruby
-gem "oushodh", git: "https://github.com/oushodh/oushodh-ruby.git", tag: "v0.1.0"
+gem "oushodh", "~> 0.1"
 ```
 
-Then run `bundle install`.
-
-To pin a commit, add `ref:`:
-
-```ruby
-gem "oushodh", git: "https://github.com/oushodh/oushodh-ruby.git", ref: "<commit sha>"
-```
-
-RubyGems: coming soon (`gem install oushodh`).
+Then run `bundle install`. Without Bundler, run `gem install oushodh`.
 
 ## Get an API key
 
@@ -349,7 +342,7 @@ The tests use a local WEBrick server and fake keys. They never call the API.
 
 ## Release
 
-For maintainers. The gem is not on RubyGems yet.
+For maintainers.
 
 1. Set `Oushodh::VERSION` in `lib/oushodh/version.rb` and date the version in `CHANGELOG.md`.
 2. Merge to `main`, then push a tag `v<version>`, such as `v0.1.0`.
